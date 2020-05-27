@@ -421,6 +421,14 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
 
+"@babel/plugin-transform-block-scoping@^7.10.0":
+  version "7.10.0"
+  resolved "https://registry.npm.taobao.org/@babel/plugin-transform-block-scoping/download/@babel/plugin-transform-block-scoping-7.10.0.tgz?cache=0&sync_timestamp=1590530264287&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fplugin-transform-block-scoping%2Fdownload%2F%40babel%2Fplugin-transform-block-scoping-7.10.0.tgz#5d7aa0cf921ec91bdc97c9b311bf1fce0ea979b0"
+  integrity sha1-XXqgz5IeyRvcl8mzEb8fzg6pebA=
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.8.3"
+    lodash "^4.17.13"
+
 "@babel/plugin-transform-block-scoping@^7.8.3":
   version "7.8.3"
   resolved "https://registry.npm.taobao.org/@babel/plugin-transform-block-scoping/download/@babel/plugin-transform-block-scoping-7.8.3.tgz#97d35dab66857a437c166358b91d09050c868f3a"
@@ -581,6 +589,14 @@
   resolved "https://registry.npm.taobao.org/@babel/plugin-transform-property-literals/download/@babel/plugin-transform-property-literals-7.8.3.tgz#33194300d8539c1ed28c62ad5087ba3807b98263"
   integrity sha1-MxlDANhTnB7SjGKtUIe6OAe5gmM=
   dependencies:
+    "@babel/helper-plugin-utils" "^7.8.3"
+
+"@babel/plugin-transform-property-mutators@^7.8.3":
+  version "7.8.3"
+  resolved "https://registry.npm.taobao.org/@babel/plugin-transform-property-mutators/download/@babel/plugin-transform-property-mutators-7.8.3.tgz#eaf8cbed2100c217773c624a5476d8830f5f5357"
+  integrity sha1-6vjL7SEAwhd3PGJKVHbYgw9fU1c=
+  dependencies:
+    "@babel/helper-define-map" "^7.8.3"
     "@babel/helper-plugin-utils" "^7.8.3"
 
 "@babel/plugin-transform-regenerator@^7.8.7":

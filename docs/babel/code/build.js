@@ -1,10 +1,18 @@
 const babel = require('@babel/core');
 const code = `
-const sayHi = () => {
-  console.log('Hello, Babel')
-}
-sayHi()
+var foo = {
+  // changed
+  "bar": function () {},
+  "1": function () {},
+
+  // not changed
+  "default": 1,
+  [a]: 2,
+  foo: 1
+};
 `
-const options = {}
+const options = {
+  plugins: ["@babel/plugin-transform-property-literals"]
+}
 const result = babel.transform(code, options)
-console.log(result);
+console.log(result.code);

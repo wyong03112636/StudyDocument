@@ -44,12 +44,6 @@ const result = babel.transform(code, options)
 console.log(result);
 ~~~
 
-## @babel/plugin-transform-arrow-functions
-- 插件功能
-  - 将箭头函数转换为普通函数
-- 可以使用该命令使用指定插件转换
-  - `npx babel src -d dist --plugins=@babel/plugin-transform-arrow-functions`
-
 ## @babel/preset-env
 - 插件功能
   - 可以将es6所有的代码做转换
@@ -67,3 +61,152 @@ console.log(result);
 ## @babel/polyfill
 - 插件功能
   - 将浏览器不支持的语法比如`Promise.resolve().finally()`添加垫片
+
+## @babel/plugin-transform-member-expression-literals
+- 插件功能
+  - 将对象的属性为保留字时，使用\["name"\]的形式 
+
+~~~js
+// in
+obj.foo = "isValid";
+
+obj.const = "isKeyword";
+obj["var"] = "isKeyword";
+//out
+obj.foo = "isValid";
+
+obj["const"] = "isKeyword";
+obj["var"] = "isKeyword";
+~~~
+
+## @babel/plugin-transform-property-literals
+- 插件功能
+  - 去除对象的key值的引号
+
+~~~js
+//in
+var foo = {
+  // changed
+  "bar": function () {},
+  "1": function () {},
+
+  // not changed
+  "default": 1,
+  [a]: 2,
+  foo: 1
+};
+// out
+var foo = {
+  bar: function () {},
+  1: function () {},
+
+  "default": 1,
+  [a]: 2,
+  foo: 1
+};
+~~~
+
+## @babel/plugin-transform-reserved-words
+- 插件功能
+  - 转换变量名为保留字的变量
+
+~~~js
+//in
+var abstract = 1;
+var x = abstract + 1;
+
+// out
+var _abstract = 1;
+var x = _abstract + 1;
+~~~
+
+## @babel/plugin-transform-property-mutators
+- 插件功能
+  - 将对象的get set方法，通过Object.defineProperties()改写
+
+~~~js
+// in
+var foo = {
+  get bar() {
+    return this._bar;
+  },
+  set bar(value) {
+    this._bar = value;
+  }
+};
+//out
+var foo = Object.defineProperties({}, {
+  bar: {
+    get: function () {
+      return this._bar;
+    },
+    set: function (value) {
+      this._bar = value;
+    },
+    configurable: true,
+    enumerable: true
+  }
+});
+~~~
+
+## @babel/plugin-transform-arrow-functions
+- 插件功能
+  - 将箭头函数转换为普通函数
+- 可以使用该命令使用指定插件转换
+  - `npx babel src -d dist --plugins=@babel/plugin-transform-arrow-functions`
+~~~js
+//in
+var a = () => {};
+var a = (b) => b;
+
+const double = [1,2,3].map((num) => num * 2);
+console.log(double); // [2,4,6]
+//out
+var a = function () {};
+var a = function (b) {
+  return b;
+};
+
+const double = [1, 2, 3].map(function (num) {
+  return num * 2;
+});
+console.log(double); // [2,4,6]
+~~~
+
+## @babel/plugin-transform-block-scoped-functions
+- 插件作用
+  - 确保块级声明的函数是块级作用域的
+
+~~~js
+//in
+{
+  function name (n) {
+    return n;
+  }
+}
+name("Steve");
+//out
+{
+  let name = function (n) {
+    return n;
+  };
+}
+name("Steve");
+~~~
+
+## @babel/plugin-transform-block-scoping
+- 插件作用
+  - 将`let/const`声明的变量转为es5
+
+~~~js
+//in
+{
+  let a = 3
+}
+let a = 3
+//out
+{
+  var _a = 3;
+}
+var a = 3;
+~~~

@@ -13,6 +13,11 @@ module.exports = {
         title: 'Babel',
         path: '/babel/',
         collapseable: true,
+      },
+      {
+        title: 'ESLint',
+        path: '/eslint/',
+        collapseable: true,
       }
     ]
   }
