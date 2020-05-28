@@ -18,6 +18,11 @@ module.exports = {
         title: 'ESLint',
         path: '/eslint/',
         collapseable: true,
+      },
+      {
+        title: 'React',
+        path: '/react/',
+        collapseable: true,
       }
     ]
   }

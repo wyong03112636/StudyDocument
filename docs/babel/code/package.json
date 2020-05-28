@@ -9,6 +9,13 @@
     "@babel/plugin-transform-arrow-functions": "^7.8.3",
     "@babel/plugin-transform-block-scoped-functions": "^7.8.3",
     "@babel/plugin-transform-block-scoping": "^7.10.0",
+    "@babel/plugin-transform-computed-properties": "^7.10.1",
+    "@babel/plugin-transform-destructuring": "^7.10.1",
+    "@babel/plugin-transform-duplicate-keys": "^7.10.1",
+    "@babel/plugin-transform-for-of": "^7.10.1",
+    "@babel/plugin-transform-function-name": "^7.10.1",
+    "@babel/plugin-transform-instanceof": "^7.10.1",
+    "@babel/plugin-transform-literals": "^7.10.1",
     "@babel/plugin-transform-member-expression-literals": "^7.8.3",
     "@babel/plugin-transform-property-literals": "^7.8.3",
     "@babel/plugin-transform-property-mutators": "^7.8.3",
@@ -24,7 +31,15 @@
     "build:reserved": "babel src -d dist --plugins @babel/plugin-transform-reserved-words",
     "build:mutators": "babel src -d dist --plugins @babel/plugin-transform-property-mutators",
     "build:block-scoped-function": "babel src -d dist --plugins @babel/plugin-transform-block-scoped-functions",
-    "build:block-scoping": "babel src -d dist --plugins @babel/plugin-transform-block-scoping"
+    "build:block-scoping": "babel src -d dist --plugins @babel/plugin-transform-block-scoping",
+    "build:class": "babel src -d dist --plugins @babel/plugin-transform-classes",
+    "build:computed": "babel src -d dist --plugins @babel/plugin-transform-computed-properties",
+    "build:destructuring": "babel src -d dist --plugins @babel/plugin-transform-destructuring",
+    "build:duplicate": "babel src -d dist --plugins @babel/plugin-transform-duplicate-keys",
+    "build:for-of": "babel src -d dist --plugins @babel/plugin-transform-for-of",
+    "build:function-name": "babel src -d dist --plugins @babel/plugin-transform-function-name",
+    "build:instance": "babel src -d dist --plugins @babel/plugin-transform-instanceof",
+    "build:literal": "babel src -d dist --plugins @babel/plugin-transform-literals"
   },
   "dependencies": {
     "@babel/polyfill": "^7.8.7"

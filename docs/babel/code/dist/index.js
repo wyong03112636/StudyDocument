@@ -1,4 +1,4 @@
-var sayHi = () => {
+const sayHi = () => {
   console.log('Hello, Babel');
 };
 

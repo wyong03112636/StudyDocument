@@ -210,3 +210,195 @@ let a = 3
 }
 var a = 3;
 ~~~
+
+## @babel/plugin-transform-classes
+- 插件作用
+  - 将class写法转换为es5函数写法
+
+~~~js
+//in
+class Test {
+  constructor(name) {
+    this.name = name;
+  }
+
+  logger () {
+    console.log("Hello", this.name);
+  }
+}
+//out
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Test = function () {
+  function Test(name) {
+    _classCallCheck(this, Test);
+
+    this.name = name;
+  }
+
+  Test.prototype.logger = function logger() {
+    console.log("Hello", this.name);
+  };
+
+  return Test;
+}();
+~~~
+
+## @babel/plugin-transform-computed-properties
+- 插件作用
+  - 通过object.defineProperty的方式给对象添加key值
+
+~~~js
+//in
+var obj = {
+  ["x" + foo]: "heh",
+  ["y" + bar]: "noo",
+  foo: "foo",
+  bar: "bar"
+};
+//out
+var _obj;
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+var obj = (
+  _obj = {},
+  _defineProperty(_obj, "x" + foo, "heh"),
+  _defineProperty(_obj, "y" + bar, "noo"),
+  _defineProperty(_obj, "foo", "foo"),
+  _defineProperty(_obj, "bar", "bar"),
+  _obj
+);
+~~~
+
+## @babel/plugin-transform-destructuring
+- 插件作用
+  - 转换解构赋值的写法
+
+~~~js
+//in
+let {x, y} = obj;
+let [a, b, ...rest] = arr;
+//out
+function _toArray(arr) { ... }
+let _obj = obj,
+    x = _obj.x,
+    y = _obj.y;
+
+let _arr = arr,
+    _arr2 = _toArray(_arr),
+    a = _arr2[0],
+    b = _arr2[1],
+    rest = _arr2.slice(2);
+~~~
+
+## @babel/plugin-transform-duplicate-keys
+- 插件作用
+  - 同一对象的相同的key用`['key']`的形式代替
+
+~~~js
+//in
+var x = { a: 5, a: 6 };
+var y = {
+  get a() {},
+  set a(x) {},
+  a: 3,
+};
+//out
+var x = { a: 5, ["a"]: 6 };
+var y = {
+  get a() {},
+  set a(x) {},
+  ["a"]: 3,
+};
+~~~
+
+## @babel/plugin-transform-for-of
+- 插件作用
+  - 转换`for of`循环语句
+
+~~~js
+//in
+for (var i of foo) {}
+//out
+var _iteratorNormalCompletion = true;
+var _didIteratorError = false;
+var _iteratorError = undefined;
+
+try {
+  for (var _iterator = foo[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    var i = _step.value;
+  }
+} catch (err) {
+  _didIteratorError = true;
+  _iteratorError = err;
+} finally {
+  try {
+    if (!_iteratorNormalCompletion && _iterator.return != null) {
+      _iterator.return();
+    }
+  } finally {
+    if (_didIteratorError) {
+      throw _iteratorError;
+    }
+  }
+}
+~~~
+
+## @babel/plugin-transform-function-name （失效的插件）
+- 插件作用
+  - 箭头函数转为普通函数
+
+~~~js
+// in
+let number = (x) => x
+// out
+let number = x => x
+~~~
+
+## @babel/plugin-transform-instanceof
+- 插件作用
+  - 转换instanceof
+
+~~~js
+//in
+foo instanceof Bar;
+//out
+function _instanceof(left, right) {
+  if (right != null && typeof Symbol !== "undefined" && right[Symbol.hasInstance]) {
+    return right[Symbol.hasInstance](left);
+  } else {
+    return left instanceof right;
+  }
+}
+
+_instanceof(foo, Bar);
+~~~
+
+## @babel/plugin-transform-literals
+- 插件作用
+  - 转换二进制，八进制，unicode
+
+~~~js
+//in
+var b = 0b11; // binary integer literal
+var o = 0o7; // octal integer literal
+const u = 'Hello\u{000A}\u{0009}!'; // unicode string literals, newline and tab
+//out
+var b = 3; // binary integer literal
+var o = 7; // octal integer literal
+const u = 'Hello\n\t!'; // unicode string literals, newline and tab
+~~~

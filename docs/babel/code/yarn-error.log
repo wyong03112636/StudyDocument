@@ -1,5 +1,5 @@
 Arguments: 
-  C:\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add -D transform-property-literals
+  C:\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add -D @babel/plugin-transform-classes
 
 PATH: 
   C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\·王勇\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client;C:\Program Files\Intel\iCLS Client;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH;C:\Python32;C:\nvm;C:\nodejs;C:\nodejs;D:\MongoDB\Server\bin;C:\Program Files (x86)\Yarn\bin;C:\Users\·王勇\AppData\Local\Microsoft\WindowsApps;D:\VS CODE\Microsoft VS Code\bin;C:\Users\·王勇\AppData\Local\GitHubDesktop\bin;C:\Users\·王勇\AppData\Local\Microsoft\WindowsApps;C:\nvm;C:\nodejs;C:\nodejs;C:\Users\·王勇\AppData\Local\Yarn\bin;C:\Users\·王勇\AppData\Local\BypassRuntm
@@ -14,17 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.npm.taobao.org/transform-property-literals: Not found
-      at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:65003:18)
-      at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:129018:22)
-      at Request.emit (events.js:210:5)
-      at Request.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:129990:10)
-      at Request.emit (events.js:210:5)
-      at IncomingMessage.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:129912:12)
-      at Object.onceWrapper (events.js:299:28)
-      at IncomingMessage.emit (events.js:215:7)
-      at endReadableNT (_stream_readable.js:1183:12)
-      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+  Error: EPERM: operation not permitted, unlink 'D:\vuepress\docs\babel\code\node_modules\@babel\core\node_modules\debug'
 
 npm manifest: 
   {
@@ -36,6 +26,8 @@ npm manifest:
       "@babel/cli": "^7.8.4",
       "@babel/core": "^7.9.6",
       "@babel/plugin-transform-arrow-functions": "^7.8.3",
+      "@babel/plugin-transform-block-scoped-functions": "^7.8.3",
+      "@babel/plugin-transform-block-scoping": "^7.10.0",
       "@babel/plugin-transform-member-expression-literals": "^7.8.3",
       "@babel/plugin-transform-property-literals": "^7.8.3",
       "@babel/plugin-transform-property-mutators": "^7.8.3",
@@ -49,7 +41,9 @@ npm manifest:
       "build:member": "babel src -d dist --plugins @babel/plugin-transform-member-expression-literals",
       "build:literals": "babel src -d dist --plugins @babel/plugin-transform-property-literals",
       "build:reserved": "babel src -d dist --plugins @babel/plugin-transform-reserved-words",
-      "build:mutators": "babel src -d dist --plugins @babel/plugin-transform-property-mutators"
+      "build:mutators": "babel src -d dist --plugins @babel/plugin-transform-property-mutators",
+      "build:block-scoped-function": "babel src -d dist --plugins @babel/plugin-transform-block-scoped-functions",
+      "build:block-scoping": "babel src -d dist --plugins @babel/plugin-transform-block-scoping"
     },
     "dependencies": {
       "@babel/polyfill": "^7.8.7"
@@ -482,6 +476,14 @@ Lockfile:
     integrity sha1-Q37sW3mbWFIHIISzrl72boNJ6KM=
     dependencies:
       "@babel/helper-plugin-utils" "^7.8.3"
+  
+  "@babel/plugin-transform-block-scoping@^7.10.0":
+    version "7.10.0"
+    resolved "https://registry.npm.taobao.org/@babel/plugin-transform-block-scoping/download/@babel/plugin-transform-block-scoping-7.10.0.tgz?cache=0&sync_timestamp=1590530264287&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fplugin-transform-block-scoping%2Fdownload%2F%40babel%2Fplugin-transform-block-scoping-7.10.0.tgz#5d7aa0cf921ec91bdc97c9b311bf1fce0ea979b0"
+    integrity sha1-XXqgz5IeyRvcl8mzEb8fzg6pebA=
+    dependencies:
+      "@babel/helper-plugin-utils" "^7.8.3"
+      lodash "^4.17.13"
   
   "@babel/plugin-transform-block-scoping@^7.8.3":
     version "7.8.3"
