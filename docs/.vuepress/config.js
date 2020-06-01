@@ -12,7 +12,7 @@ module.exports = {
       {
         title: 'Babel',
         path: '/babel/',
-        collapseable: true,
+        collapseable: true, 
       },
       {
         title: 'ESLint',
