@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .title {
+      color: blue;
+    }
+  </style>
 </head>
 <body>
   <div id="app"></div>
@@ -11,6 +16,11 @@
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   <script type="text/babel">
+    const element = (
+      <h1 clasName="title" style={{fontSize: '30px'}}>
+        Hello, React
+      </h1>
+    );
     ReactDOM.render(
       <h1>Hello, React</h1>,
       document.getElementById('app')
