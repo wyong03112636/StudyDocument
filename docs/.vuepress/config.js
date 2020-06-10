@@ -23,7 +23,12 @@ module.exports = {
         title: 'React',
         path: '/react/',
         collapseable: true,
-      }
+      },
+      {
+        title: 'TypeScript',
+        path: '/typescript/',
+        collapseable: true,
+      } 
     ]
   }
 }
