@@ -12,7 +12,7 @@ module.exports = {
       {
         title: 'Babel',
         path: '/babel/',
-        collapseable: true, 
+        collapseable: true,
       },
       {
         title: 'ESLint',
@@ -28,7 +28,12 @@ module.exports = {
         title: 'TypeScript',
         path: '/typescript/',
         collapseable: true,
-      } 
-    ]
-  }
-}
+      },
+      {
+        title: 'Array&Object',
+        path: '/array&object/',
+        collapseable: true,
+      },
+    ],
+  },
+};
