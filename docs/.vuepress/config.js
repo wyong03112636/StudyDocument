@@ -34,6 +34,11 @@ module.exports = {
         path: '/array&object/',
         collapseable: true,
       },
+      {
+        title: 'Chores',
+        path: '/chores/',
+        collapseable: true,
+      },
     ],
   },
 };
