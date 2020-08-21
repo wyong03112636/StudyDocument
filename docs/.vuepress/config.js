@@ -39,6 +39,11 @@ module.exports = {
         path: '/chores/',
         collapseable: true,
       },
+      {
+        title: '设计模式',
+        path: '/designmode/',
+        collapseable: true,
+      },
     ],
   },
 };
