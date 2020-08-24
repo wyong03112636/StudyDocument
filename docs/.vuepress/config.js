@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Study document',
+  title: 'Myself document',
   description: 'Myself document',
   themeConfig: {
     smoothScroll: true,
@@ -35,8 +35,8 @@ module.exports = {
         collapseable: true,
       },
       {
-        title: 'Chores',
-        path: '/chores/',
+        title: 'Chore',
+        path: '/chore/',
         collapseable: true,
       },
       {
