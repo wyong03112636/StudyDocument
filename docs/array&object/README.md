@@ -82,3 +82,39 @@ const isThan = arr.every(item => item > 1);
 const arr = [1, 2, 3, 4];
 const result = arr.fill('a', 1, 4); //[1, 'a', 'a', 'a']
 ```
+
+### Array.filter()
+
+- 创建一个新数组，过滤掉不符合函数条件的元素
+
+```js
+const arr = [1, 2, 3];
+const result = arr.filter(item => {
+  return item > 2;
+});
+console.log(result); //[3]
+```
+
+### Array.find()
+
+- 返回数组中满足提供测试函数的第一个元素的值，否则返回 undefined
+
+```js
+const arr = [1, 2, 3];
+const result = arr.find(item => {
+  return item > 1;
+});
+console.log(result); //2
+```
+
+### Array.findIndex()
+
+- 返回数组中满足提供的测试函数的第一个元素的索引。若没有找到对应元素则返回-1。
+
+```js
+const arr = [1, 2, 3];
+const result = arr.findIndex(item => {
+  return item > 1;
+});
+console.log(result); //1
+```
