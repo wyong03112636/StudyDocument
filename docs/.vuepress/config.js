@@ -44,6 +44,11 @@ module.exports = {
         path: '/designmode/',
         collapseable: true,
       },
+      {
+        title: '数据结构与算法',
+        path: '/datastructure/',
+        collapseable: true,
+      },
     ],
   },
 };
