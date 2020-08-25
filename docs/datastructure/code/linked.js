@@ -96,6 +96,20 @@ class SingleLinked {
     }
     this.head = prev;
   }
+
+  // 环验证
+  checkCircle() {
+    const fast = this.head.next;
+    const slow = this.head;
+    while (fast !== null && fast.next !== null) {
+      fast = fast.next.next;
+      slow = slow.next;
+      if (fast === slow) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 const linked = new SingleLinked();
 linked.append('a');
