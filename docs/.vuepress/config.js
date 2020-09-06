@@ -49,6 +49,11 @@ module.exports = {
         path: '/datastructure/',
         collapseable: true,
       },
+      {
+        title: '性能方面',
+        path: '/performance/',
+        collapseable: true,
+      },
     ],
   },
 };

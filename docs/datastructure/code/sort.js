@@ -64,7 +64,7 @@ function findKth(arr, k) {
       p = partition(arr, p + 1, len - 1);
     }
   }
-  return arr[p];·
+  return arr[p];
 }
 console.log(findKth([2, 1, 3, 88, 77, 44, 333], 4));
 // 找到区间最大值的下标
@@ -89,3 +89,6 @@ function swap(arr, i, j) {
   arr[i] = arr[j];
   arr[j] = tmp;
 }
+
+const fs = require('fs');
+console.log(fs.readFileSync('./linked.js').toString('utf-8'));
