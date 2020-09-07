@@ -14,3 +14,7 @@
       <link rel="alternate" hreflang="es" href="https://es.example.com" />
       <link rel="alternate" hreflang="de" href="https://de.example.com" />
     ```
+
+## chrome 开发者工具
+
+- `https://www.html.cn/doc/chrome-devtools/iterate/iterate/settings/#other`

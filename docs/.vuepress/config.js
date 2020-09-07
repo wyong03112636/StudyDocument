@@ -30,6 +30,11 @@ module.exports = {
         collapseable: true,
       },
       {
+        title: 'WebPack',
+        path: '/webpack/',
+        collapseable: true,
+      },
+      {
         title: 'Array&Object',
         path: '/array&object/',
         collapseable: true,
