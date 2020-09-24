@@ -1,4 +1,5 @@
+import './index.css'
 function sayHello(usename: string):string {
   return 'Hello' + usename
 }
-sayHello('World')
+console.log(sayHello('World'))

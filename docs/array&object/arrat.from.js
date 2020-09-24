@@ -19,3 +19,18 @@ console.log(Array.from(map.keys()));
 
 const arr3 = arr.concat('a', arr2, 'b');
 console.log(arr3);
+
+let hash = {}
+
+const result = [{id: 1, name: 'xxx'}, {id: 1, name: 'ccc'}, {id: 2, name: 'aaa'}].reduce((pre, cur) => {
+  hash[cur.id] ?
+  pre.forEach(item => {
+    if (item.id === cur.id) {
+      item.name = 'ccc'
+    }
+  }) :
+  hash[cur.id] = true && pre.push(cur)
+  return pre
+}, [])
+
+console.log(result)

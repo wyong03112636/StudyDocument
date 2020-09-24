@@ -11,6 +11,7 @@
 
 ```js
   const HtmlWebpackPlugin = require('html-webpack-plugin')
+  const webpack = require('webpack')
   module.exports = {
     entrty: './src/index.js',
     output: {
@@ -18,9 +19,12 @@
       filename: '[name]_[hash:6]_dundle.js', //打包之后的文件名,置顶hash值并且置顶hash位数, hash值是根据文件内容算出来的
       publicpath: 'https://example.com' //修改html文件的引入地址，将当前域名添加到引入路径前，一般用于cdn
     },
-    plugins: [new HtmlWebpackPlugin({
-      template: './src/index.html'
-    })],
+    plugins: [
+      new webpack.HotModuleReplacementPlugin(),
+      new HtmlWebpackPlugin({
+        template: './src/index.html'
+      })
+    ],
     module: {
       rules: [
         {
@@ -28,6 +32,10 @@
           use: ['style-loader', 'css-loader']
         }
       ]
+    },
+    devServer: {
+      contentBase: './dist',
+      hot: true
     }
   }
 ```
