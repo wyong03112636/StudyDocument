@@ -84,4 +84,28 @@ arr = arr.reduce((p, c) => {
 
 ## WebSocket
 
-- websocket 是一个持久化的网络通信协议，可以在单个 TCP 链接上进行全双工通讯，没有了 request 和 response 的概念，链接一旦建立，客户端和服务器端之间实时进行双向数据传输
+- `websocket` 是一个持久化的网络通信协议，可以在单个 TCP 链接上进行全双工通讯，没有了 request 和 response 的概念，链接一旦建立，客户端和服务器端之间实时进行双向数据传输
+
+## Promise
+
+- 定义
+
+  - 解决异步操作带来的回调地狱的问题
+
+- 方法
+
+  - **Promise.all()**
+
+    - 接受一个 promise 实例组成数组(也可以包含变量)，当每个实例都 resolve 的时候，then 方法的参数中可以拿到每个实例 resovle 的值组成的数组(该数组的值的顺序与传进 all 方法的数组的顺序是对应的，即使包含变量，也是对应的)，当有一个实例 reject 的时候，则不会执行`then`方法，个人理解类似数组的`every`方法
+
+  - **Promise.finally()**
+
+    - 无论 promise 实例是成功还是失败都会执行的方法
+
+  - **Promise.race()**
+
+    - 接受的参数与 `all` 方法类似，返回的值是用时最短的 promsie 实例 resovle 的值, 当包含同步程序的时候，首先返回同步程序的值，当有 reject 时，会报 waring，并且在`then`方法的回调中拿不到值
+
+  - **Promise.resolve()**
+
+    - 方法返回一个以给定值解析后的 Promise 对象。如果这个值是一个 promise ，那么将返回这个 promise ；如果这个值是 thenable（即带有"then" 方法），返回的 promise 会“跟随”这个 thenable 的对象，采用它的最终状态；否则返回的 promise 将以此值完成。此函数将类 promise 对象的多层嵌套展平。
