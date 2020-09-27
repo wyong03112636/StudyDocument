@@ -81,3 +81,7 @@ arr = arr.reduce((p, c) => {
   return p;
 }, []);
 ```
+
+## WebSocket
+
+- websocket 是一个持久化的网络通信协议，可以在单个 TCP 链接上进行全双工通讯，没有了 request 和 response 的概念，链接一旦建立，客户端和服务器端之间实时进行双向数据传输
