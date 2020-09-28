@@ -7,8 +7,10 @@ function feeter(person: Person) {
 }
 class Student {
   fullName: string;
-  constructor(public firstName, public lastName) {
+  constructor(public firstName: string, public lastName: string) {
     this.fullName = firstName + lastName
   }
 }
 let student = new Student('wang', 'yong');
+// aaaaaaa
+

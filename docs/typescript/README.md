@@ -43,4 +43,13 @@ let strlength: number = (<string>someValue).length;
 let strlength2: number = (someValue as string).length;
 //泛型
 function test<T>(arg: T): T {}
+//泛型继承 泛型里必须包含一个name属性
+interface Test {
+  name: string;
+}
+function test<T extends Test>(arg: T): T {}
+//泛型约束 泛型必须是number类型或者string类型
+function test<T extends number | string>(arg: T): T {}
 ```
+
+## [参考链接](https://juejin.im/post/6876240277208563720#heading-79)

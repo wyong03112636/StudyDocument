@@ -1,7 +1,8 @@
+"use strict";
 function feeter(person) {
     return person.firstName + person.lastName;
 }
-var Student = /** @class */ (function () {
+var Student = (function () {
     function Student(firstName, lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
