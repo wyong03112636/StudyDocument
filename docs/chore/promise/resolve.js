@@ -8,7 +8,7 @@
 
 new Promise(function (resolve) {
   setTimeout(() => {
-      console.log(3)
+     resolve(3)
   }, 0);
 }).then(value => {
   console.log(value);
@@ -29,3 +29,4 @@ Promise.resolve(fun)
 })
 
 Promise.resolve(2).then(value => console.log(value));
+console.log(4)
