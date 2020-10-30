@@ -18,3 +18,21 @@
 ## chrome 开发者工具
 
 - `https://www.html.cn/doc/chrome-devtools/iterate/iterate/settings/#other`
+
+## 页面性能优化手段
+
+### Service Worker
+
+- [Google 官方文档](https://developers.google.com/web/fundamentals/primers/service-workers/)
+
+- 原理： 简单的理解为在`Browser`和`Server`中间的一层`Proxy`, 根据不同资源采取不同策略，将资源缓存到`Cache API`中
+
+### SSR
+
+- 简单理解： 本质上请求后端直接返回`html`文件，前端直接显示
+
+### 骨架图&loading 动画 (提高用户体验)
+
+### preload & prefetch
+
+- 作用： 在浏览器没有构建 dom 之前开始加载资源
