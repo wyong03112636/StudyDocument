@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <textarea cols="50" rows="10" placeholder="这里的内容将被复制到剪切板！" id="sourceDOM"></textarea>
+  <p>
+    <button id="copyBtn">Copy</button>  <span id="messageDOM"></span>
+  </p>
+  <textarea cols="50" rows="10" placeholder="这里粘贴试一下吧！"></textarea>
+  <script>
+    var randomStr = Math.random().toString(16);
+  
+  var sourceDOM = document.getElementById('sourceDOM'),
+      messageDOM = document.getElementById('messageDOM'),
+      copyBtn = document.getElementById('copyBtn');
+  
+  sourceDOM.value = randomStr;
+  
+  copyBtn.onclick = function() {
+    copyTextToClipboard();
+  };
+  
+  function copyTextToClipboard() {
+    sourceDOM.select();
+    sourceDOM.setSelectionRange(0, sourceDOM.value.length);
+    var flag = false;
+    try {
+      flag = document.execCommand('copy');
+    } catch (err) {
+      
+    }
+    if (flag) {
+      messageDOM.innerText = '复制成功！';
+      sourceDOM.blur();
+    } else {
+      messageDOM.innerText = '复制失败！';
+    }
+    setTimeout(function () {
+      messageDOM.innerText = '';
+    }, 2000);
+  }
+  </script>
+</body>
+</html>

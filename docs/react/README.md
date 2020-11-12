@@ -18,7 +18,7 @@ React.createElement(
 <h1 className='title'>Hello, React</h1>
 ```
 
-### 解构赋值对 React 组件进行船只
+### 解构赋值对 React 组件进行传值
 
 ```jsx
 // 当属性很多时，使用剩余参数，而不是一个一个传递, 避免代码过多导致不必要的错误
@@ -48,7 +48,7 @@ function Greeting({ name, ...restProps }) {
 
 ### useState
 
-- useState 接受一个初始化函数，只会在第一次渲染时调用。
+- useState 接受一个初始化函数，只会在第一次渲染时调用。适合处理一些比较复杂的数据
 
 ```js
 const [state, setState] = useState(() => {
@@ -93,3 +93,121 @@ setState((prevState) => {
 })
 
 ```
+
+- useRef 的使用
+  - 简单说是，当需要存放一个数据，需要无论在哪里都能取到最新状态时，需要使用 useRef
+  - useRef 的引用地址不会改变
+
+```js
+function SomeComponent() {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => {
+      console.log(count);
+      setCount(currentCount => currentCount + 1);
+    });
+    return () => {
+      clearInterval(id);
+    };
+  }, []); // 将count作为依赖的话，打印出来也是当前的count，但是会造成死循环
+  return <h1>See what's printed in console.</h1>;
+}
+```
+
+上面这段代码打印永远都是 0，因为函数声明时（第一次运行时），count 是 0，之后无论这个函数调用多少次，都会是 0
+这时，如果我们需要拿到 count 最新值，就可以使用 useRef 声明一个可变数据对象，来存储 count，由于对象引用是不变的，
+当我们更新某个字段时，闭包函数就能访问到最新的值了。
+
+```js
+// setCount执行会rerender，也就是整个函数会重新执行，把最新的count赋值给countRef.current, 就可以打出最新值了
+function SomeComponent() {
+  const [count, setCount] = useState(0);
+  const countRef = useRef(count);
+  countRef.current = count;
+  useEffect(() => {
+    const id = setInterval(() => {
+      console.log(countRef.current);
+      setCount(currentCount => currentCount + 1);
+    });
+    return () => {
+      clearInterval(id);
+    };
+  }, []);
+  return <h1>See what's printed in console.</h1>;
+}
+```
+
+- useContext 跨组件传参
+
+```tsx
+  const Context = React.createContext({
+    monyForDad: 0,
+    monyForMe: 0
+  })
+  function Grandpa() {
+    const[montForDad] = React.useState(100)
+    const[montForMe] = React.useState(101)
+    return (
+      <Context.Provider value={{  , montForMe}}>
+        <Dady>
+          <Me />
+        </Dady>
+      </Context.Provider>
+    )
+  }
+
+  function Dady({children?: React.ChildNode}) {
+    const ctx = React.useContext(Context)
+    return (
+      <div className="dady">
+        <h2>This is Dady, received ${ctx.moneyForDad}</h2>
+        {children}
+      </div>
+    )
+  }
+
+  function Me() {
+    const ctx = useContext(Context);
+    return (
+      <div className="son">
+        <h3>This is Me, received ${ctx.moneyForMe}</h3>
+      </div>
+    );
+  }
+
+```
+
+- useEffect vs useLayoutEffect
+
+- useLayoutEffect 与 useEffect 传参一致，但有以下区别
+
+  - 执行时机不同。useLayoutEffect 的入参函数会在 react 更新 DOM 树后同步调用。useEffect 为异步调用
+  - useLayoutEffect 在 development 模式下 SSR 会有警告 ⚠️ 通常情况下 useLayoutEffect 会用在做动效和记录 layout 的一些特殊场景。一般不需要使用 useLayoutEffect。
+
+- 函数组件声明周期
+  React 函数组件的执行阶段分为：
+
+  1. Render 阶段
+     此阶段就是函数本体的执行阶段
+  2. Commit 阶段
+     Commit 阶段是拿着 render 返回的结果，去同步 DOM 更新的阶段。render 和 commit 分开以达到批量更新 DOM 的目的，也是 react 之后推出并行模式的设计基础。对于我们代码能感知到的部分就是 useLayoutEffect
+  3. DOM 更新结束
+     此时 DOM 已经更新完成，代码能感知到的部分就是 useEffect
+
+- useCallback useMemo 的一些使用规则
+
+  - 什么时候不应该使用 useCallback/useMemo
+
+    1. 当函数、对象直接传给 DOM 组件（div,span,imgs），不要使用 useMemo/useCallback。React 并不关心 DOM 组件的 prop 的函数、对象的引用是否变更。除了 ref 函数。因为 ref 函数在两次渲染前后引用不相等，会先使用 null 调用一次旧的 ref，再使用组件 reference 调用一次新的 ref 函数（为了回收副作用）
+    2. 当函数、对象直接传给叶子组件或组件包含引用类型的 children 传参时，不要使用 useMemo/useCallback。通常情况下，叶子组件都不会使用 React.memo，而 children 每次引用都会变，所以这些组件其实并不 care 传入的函数、对象是否引用有变更
+    3. 不要将一个明显每次渲染都是新的变量作为 useCallback/useMemo。比如：
+       const x = ['hello'];
+       const cb = useCallback(noop, [prop1, prop2, x]);
+    4. 当函数、对象传入的组件不关心是否是个新的引用时，不要使用 useMemo/useCallback（你需要查看组件的源码，确认没有使用 React.memo/PureComponent 并且同步访问最新的 prop 传参，或者直接将 prop 透传给 DOM 或者叶子节点组件）。还要考虑你是否每次都传了一个没有缓存的新的 children。
+
+  - 什么时候要使用 useMemo/useCallback
+    1. 在使用 Context Provider 时，使用 useMemo。Provider 通常会有很多组件订阅它的变更，像`<Provider value={{id, name}}>` 这样的代码，会导致每次组件重绘时，Provider value 引用更新，导致所有订阅此 Provider 的 Consumer 组件及 useContext 所在的组件重绘
+    2. 当你用到一个耗时的计算，而此计算的输入是一个在重绘时引用不会变更的变量时，使用 useMemo。比如：数据量较大的 map/filter 操作
+    3. 当使用 ref 函数时，使用 useMemo/useCallback。比如：当使用 useIntersectionObserver hook 时，ref 函数会根据形参是否为 null 执行 disconnect 和 re-connect 操作，需要避免 ref 引用变更导致无用的 disconnect re-connect 调用
+    4. 当引用对象作为 useEffect 的依赖时，为了避免不停执行 useEffect 中的函数，需要使用 useMemo/useCallback
+    5. 当子组件使用了 React.memo/PureComponent，prop 作为是否重绘的唯一依据，需要使用 useMemo/useCallback。使用 React DevTools Profiler 来查看 state 变更时的渲染耗时。找出那些渲染慢的组件，使用 React.memo 来避免不必要的关联重绘这些组件
