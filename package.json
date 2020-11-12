@@ -1,17 +1,21 @@
 {
-  "name": "vuepress",
+  "name": "doc",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "serve": "vuepress dev docs",
+    "dev": "node --max_old_space_size=4096 ./node_modules/vuepress/cli.js dev docs --open",
+    "build": "node --max_old_space_size=4096 ./node_modules/vuepress/cli.js build docs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "tsc": "^1.20150623.0"
+  },
+  "devDependencies": {
+    "vuepress": "^1.7.1"
   }
 }
