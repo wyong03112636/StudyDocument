@@ -148,7 +148,7 @@ function SomeComponent() {
     const[montForDad] = React.useState(100)
     const[montForMe] = React.useState(101)
     return (
-      <Context.Provider value={{  , montForMe}}>
+      <Context.Provider value={{montForDad, montForMe}}>
         <Dady>
           <Me />
         </Dady>
