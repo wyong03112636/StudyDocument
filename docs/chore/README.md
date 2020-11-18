@@ -109,3 +109,17 @@ arr = arr.reduce((p, c) => {
   - **Promise.resolve()**
 
     - 方法返回一个以给定值解析后的 Promise 对象。如果这个值是一个 promise ，那么将返回这个 promise ；如果这个值是 thenable（即带有"then" 方法），返回的 promise 会“跟随”这个 thenable 的对象，采用它的最终状态；否则返回的 promise 将以此值完成。此函数将类 promise 对象的多层嵌套展平。
+
+## Session Cookie
+
+- session 存储于服务器，可以理解为一个状态列表，拥有一个唯一识别符号 sessionId，通常存放于 cookie 中。服务器收到 cookie 后解析出 sessionId，再去 session 列表中查找，才能找到相应 session。依赖 cookie
+- cookie 类似一个令牌，装有 sessionId，存储在客户端，浏览器通常会自动添加。
+- token 也类似一个令牌，无状态，用户信息都被加密到 token 中，服务器收到 token 后解密就可知道是哪个用户。需要开发者手动添加。
+- jwt 只是一个跨域认证的方案
+
+### token 认证流程
+
+- 用户登陆成功后，服务器返回 token 给客户端
+- 客户端收到数据保存在客户端 一般保存到`localStorage cookie sessionStorage`中
+- 客户端再次访问服务器，将 token 放入 headers 中
+- 服务端采用 filter 校验，校验成功则返回数据
