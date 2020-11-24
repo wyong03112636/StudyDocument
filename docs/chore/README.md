@@ -123,3 +123,22 @@ arr = arr.reduce((p, c) => {
 - 客户端收到数据保存在客户端 一般保存到`localStorage cookie sessionStorage`中
 - 客户端再次访问服务器，将 token 放入 headers 中
 - 服务端采用 filter 校验，校验成功则返回数据
+
+### vw vh 布局
+
+- 类似 rem 布局，在 sass 或 less 中可以定义函数
+
+```Scss
+  // 750为设计稿的宽度，可以根据设计稿灵活设置 高度同理
+  @function vw($px) {
+    @return ($px / 750) * 100vw;
+  }
+  @function vh($px) {
+    @return (&px / 1250) * 100vh;
+  }
+  // 使用方式
+  div {
+    width: vw(250);
+    height: vh(350);
+  }
+```
