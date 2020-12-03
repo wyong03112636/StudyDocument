@@ -255,7 +255,7 @@ function expansive(a, b) {
 
 - useLayoutEffect 与 useEffect 传参一致，但有以下区别
 
-  - 执行时机不同。useLayoutEffect 的入参函数会在 react 更新 DOM 树后同步调用。useEffect 为异步调用
+  - 执行时机不同。useLayoutEffect 的入参函数会在 react 更新 DOM 树后同步调用。useEffect 为异步调用。useLayoutEffect 在 react render 之前，dom 发生改变之后调用
   - useLayoutEffect 在 development 模式下 SSR 会有警告 ⚠️ 通常情况下 useLayoutEffect 会用在做动效和记录 layout 的一些特殊场景。一般不需要使用 useLayoutEffect。
 
 - 函数组件声明周期
