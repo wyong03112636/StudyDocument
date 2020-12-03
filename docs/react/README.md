@@ -94,6 +94,8 @@ setState((prevState) => {
 
 ```
 
+### useRef
+
 - useRef 的使用
   - 简单说是，当需要存放一个数据，需要无论在哪里都能取到最新状态时，需要使用 useRef
   - useRef 的引用地址不会改变
@@ -137,7 +139,7 @@ function SomeComponent() {
 }
 ```
 
-- useContext 跨组件传参
+### useContext 跨组件传参
 
 ```tsx
   const Context = React.createContext({
@@ -175,6 +177,78 @@ function SomeComponent() {
     );
   }
 
+```
+
+### useEffect
+
+- 当 useEffect 有依赖时，每次状态更改都会触发 clean up，也就是都会执行 return 的函数
+
+```tsx
+function App() {
+  const [message, updateMessage] = React.useState('');
+  const [counter, updateCounter] = React.useState(0);
+
+  // 没有依赖
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      updateCounter(c => c + 1);
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+      console.log('clean up when unmount');
+    };
+  }, []);
+
+  // 有依赖
+  React.useEffect(() => {
+    updateMessage('hello' + counter);
+    return () => {
+      console.log('clean up after every render.');
+    };
+  }, [counter]);
+  return (
+    <>
+      <div>counter: {counter}</div>
+      <div> message: {message}</div>
+    </>
+  );
+}
+```
+
+### useMemo
+
+- 通过接收一个函数，以及依赖，当依赖发生变化时，对函数进行求值，返回这个值，并对值进行缓存。
+
+```tsx
+// 当依赖a或者b发生变化时，调用expansive函数进行求值，返回值为c，进行缓存
+function App() {
+  const [a, setA] = React.useState(1);
+  const [b, setB] = React.useState(2);
+  const [d, setD] = React.useState(3);
+
+  // 当且仅当a或者b变化时，进行c的求值
+  const c = React.useMemo(() => expansive(a, b), [a, b]);
+
+  return (
+    <>
+      <div>a: {a}</div>
+      <div>b: {b}</div>
+      <div>c: {c}</div>
+      <div>d: {d}</div>
+      <button onClick={() => setA(a + 10)}>update a</button>
+      <button onClick={() => setB(b + 20)}>update b</button>
+    </>
+  );
+}
+
+function expansive(a, b) {
+  let value = 0;
+  for (const i = 0; i < 10000; i++) {
+    value += Math.random() * 1;
+  }
+
+  return (a + b + value).toFixed(0);
+}
 ```
 
 - useEffect vs useLayoutEffect
