@@ -43,6 +43,14 @@
       messageDOM.innerText = '';
     }, 2000);
   }
+  let i = 0
+  let time = setInterval(() => {
+    if (i > 10) {
+      clearInterval(time)
+    }
+    console.log(i)
+    i ++
+  }, 200)
   </script>
 </body>
 </html>

@@ -1,15 +1,15 @@
 <template>
 <div id="app">
   <!-- <VueOdometer /> -->
-  <Editor />
+  <WaterMark />
 </div>
 </template>
 
 <script>
-import Editor from './components/Editor';
+import WaterMark from './components/water-mark';
 // import VueOdometer from './components/vue-odometer';
 export default {
-  components:{Editor},
+  components:{WaterMark},
   data(){
     return {
       wangValue:'aaaaaa',
