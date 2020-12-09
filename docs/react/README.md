@@ -227,7 +227,7 @@ function App() {
   const [d, setD] = React.useState(3);
 
   // 当且仅当a或者b变化时，进行c的求值
-  const c = React.useMemo(() => expansive(a, b), [a, b]);
+  const c = React.useMemo(() => expensive(a, b), [a, b]);
 
   return (
     <>
@@ -241,7 +241,7 @@ function App() {
   );
 }
 
-function expansive(a, b) {
+function expensive(a, b) {
   let value = 0;
   for (const i = 0; i < 10000; i++) {
     value += Math.random() * 1;
