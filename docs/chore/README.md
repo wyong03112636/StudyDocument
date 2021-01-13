@@ -142,3 +142,21 @@ arr = arr.reduce((p, c) => {
     height: vh(350);
   }
 ```
+
+### 路由
+
+#### 实现前端路由需要解决两个核心
+
+- 如何改变 url 缺不引起页面刷新？
+- 如何检测 url 变化
+
+#### hash 实现
+
+- hash 是 url 中#及后面的部分，改变 url 重的 hash 的不会引起页面刷新
+- 通过 hashchange 时间可以监听到 url 的变化，改变 url 的方式只有这几种，通过浏览器的前进后退，a 标签， window.location 改变 url，这几种情况都会触发 hashchange 事件
+
+#### history 实现
+
+- history 提供了 pushState 和 replaceState 两个方法，这两个方法改变 URL 的 path 部分不会引起页面刷新
+- history 提供了 popstate 事件，但是有些不同：通过浏览器前进后退改变 url 会触发 popstate，通过 a 标签和 pushState/replaceState 不会触发 popstate
+  但是可以拦截 pushState/replaceState 的调用及 a 标签的点击事件
