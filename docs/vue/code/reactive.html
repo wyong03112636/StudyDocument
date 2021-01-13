@@ -21,7 +21,6 @@
       }
 
       notify() {
-        console.log(this.deps)
         this.deps.forEach(watcher => watcher.update())
       }
     }
@@ -58,13 +57,10 @@
       }
 
       gets() {
-        console.log(this, 1)
         pushTarget(this)
-        this.value = this.getter()
+        this.getter()
         popTarget()
-        return this.value
       }
-
     }
 
 
