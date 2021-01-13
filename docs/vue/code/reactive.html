@@ -12,25 +12,26 @@
       constructor() {
         this.deps = new Set()
       }
+      static target = null
 
       depend() {
-        if (Dep.tatget) {
-          this.deps.add(Dep.tatget)
+        if (Dep.target) {
+          this.deps.add(Dep.target)
         }
       }
 
       notify() {
+        console.log(this.deps)
         this.deps.forEach(watcher => watcher.update())
       }
     }
     // 正在运行的watcher
-    Dep.tatget = null
 
     const targetStack = []
 
     function pushTarget(_target) {
       if (Dep.target) {
-        targetStack.push(Dep.tatget)
+        targetStack.push(Dep.target)
       }
       Dep.target = _target
     }
@@ -49,19 +50,21 @@
     class Watcher {
       constructor (getter) {
         this.getter = getter
-        this.get()
+        this.gets()
       }
 
-      get() {
+      update() {
+        this.gets()
+      }
+
+      gets() {
+        console.log(this, 1)
         pushTarget(this)
         this.value = this.getter()
         popTarget()
         return this.value
       }
 
-      update() {
-        this.get()
-      }
     }
 
 
@@ -85,10 +88,11 @@
       msg: 'Hello World',
     })
 
-    new Watcher(() => {
+    const watch = new Watcher(() => {
       document.getElementById('app').innerHTML = `msg is ${data.msg}`
     })
     window.data = data
   </script>
+
 </body>
 </html>
