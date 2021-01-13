@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>reactive</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+    class Dep {
+      constructor() {
+        this.deps = new Set()
+      }
+
+      depend() {
+        if (Dep.tatget) {
+          this.deps.add(Dep.tatget)
+        }
+      }
+
+      notify() {
+        this.deps.forEach(watcher => watcher.update())
+      }
+    }
+    // 正在运行的watcher
+    Dep.tatget = null
+
+    const targetStack = []
+
+    function pushTarget(_target) {
+      if (Dep.target) {
+        targetStack.push(Dep.tatget)
+      }
+      Dep.target = _target
+    }
+
+    function popTarget() {
+      Dep.target = targetStack.pop()
+    }
+
+    function reactive(data) {
+      Object.keys(data).forEach(key => {
+        defineReactive(data, key)
+      })
+      return data
+    }
+
+    class Watcher {
+      constructor (getter) {
+        this.getter = getter
+        this.get()
+      }
+
+      get() {
+        pushTarget(this)
+        this.value = this.getter()
+        popTarget()
+        return this.value
+      }
+
+      update() {
+        this.get()
+      }
+    }
+
+
+    function defineReactive(data, key) {
+      let val = data[key]
+      // 依赖收集
+      const dep = new Dep()
+
+      Object.defineProperty(data, key, {
+        get() {
+          dep.depend()
+          return val
+        },
+        set(newValue) {
+          val = newValue
+          dep.notify()
+        }
+      })
+    }
+    const data = reactive({
+      msg: 'Hello World',
+    })
+
+    new Watcher(() => {
+      document.getElementById('app').innerHTML = `msg is ${data.msg}`
+    })
+    window.data = data
+  </script>
+</body>
+</html>
