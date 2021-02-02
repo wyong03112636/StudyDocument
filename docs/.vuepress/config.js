@@ -59,6 +59,11 @@ module.exports = {
         path: '/performance/',
         collapseable: true,
       },
+      {
+        title: '网络方面',
+        path: '/network/',
+        collapseable: true,
+      },
     ],
   },
 };
