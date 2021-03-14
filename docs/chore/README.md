@@ -152,8 +152,8 @@ arr = arr.reduce((p, c) => {
 
 #### hash 实现
 
-- hash 是 url 中#及后面的部分，改变 url 重的 hash 的不会引起页面刷新
-- 通过 hashchange 时间可以监听到 url 的变化，改变 url 的方式只有这几种，通过浏览器的前进后退，a 标签， window.location 改变 url，这几种情况都会触发 hashchange 事件
+- hash 是 url 中#及后面的部分，改变 url 中的 hash 的不会引起页面刷新
+- 通过 hashchange 事件可以监听到 url 的变化，改变 url 的方式只有这几种，通过浏览器的前进后退，a 标签， window.location 改变 url，这几种情况都会触发 hashchange 事件
 
 #### history 实现
 
