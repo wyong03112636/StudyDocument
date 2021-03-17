@@ -20,7 +20,7 @@ function paoSort(list) {
   }
   return list;
 }
-console.log(paoSort([2, 1, 3]));
+// console.log(paoSort([2, 1, 3]));
 
 /**
  * 插入排序
@@ -43,7 +43,7 @@ function chaSort(list) {
   return list;
 }
 
-console.log(chaSort([5, 4, 6]));
+// console.log(chaSort([5, 4, 6]));
 
 /**
  * 查找第K大的数
@@ -57,6 +57,7 @@ function findKth(arr, k) {
     return -1;
   }
   let p = partition(arr, 0, len - 1);
+  console.log(p)
   while (p + 1 !== k) {
     if (p + 1 > k) {
       p = partition(arr, 0, p - 1);
@@ -66,14 +67,14 @@ function findKth(arr, k) {
   }
   return arr[p];
 }
-console.log(findKth([2, 1, 3, 88, 77, 44, 333], 4));
+console.log(findKth([2, 1, 3, 88, 77, 44, 333], 6))
 // 找到区间最大值的下标
 function partition(arr, start, end) {
   let i = start;
   let pivot = arr[end];
   for (let j = start; j < end; j++) {
     if (arr[j] < pivot) {
-      swap(arr, i, j);
+      swap(arr, i, j)
       i += 1;
     }
   }
@@ -82,6 +83,7 @@ function partition(arr, start, end) {
 }
 
 function swap(arr, i, j) {
+  console.log(i, j)
   if (i === j) {
     return;
   }
@@ -91,4 +93,4 @@ function swap(arr, i, j) {
 }
 
 const fs = require('fs');
-console.log(fs.readFileSync('./linked.js').toString('utf-8'));
+// console.log(fs.readFileSync('./linked.js').toString('utf-8'));

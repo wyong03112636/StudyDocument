@@ -34,3 +34,14 @@ const result = [{id: 1, name: 'xxx'}, {id: 1, name: 'ccc'}, {id: 2, name: 'aaa'}
 }, [])
 
 console.log(result)
+
+const chunk = (arr, size = 1, cache = []) => {
+  const temp = [...arr]
+  if (size <= 0) {
+    return cache
+  }
+  while(temp.length) {
+    cache.push(temp.splice(0, size))
+  }
+  return cache
+}

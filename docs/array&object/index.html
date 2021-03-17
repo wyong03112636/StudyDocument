@@ -7,10 +7,22 @@
   </head>
   <body>
     <script>
-      (function () {
-        var undefined = 'a';
-        console.log(undefined, void 0);
-      })();
+      // (function () {
+      //   var undefined = 'a';
+      //   console.log(undefined, void 0);
+      // })();
+      try {
+          let a = 0
+          ;(async function() {
+              a += 1
+              console.log('inner', a)
+              throw new Error('123')
+              // a()
+          })()
+          console.log('outer', a)
+      } catch(e) {
+          console.warn('Error', e)
+      }
     </script>
   </body>
 </html>
