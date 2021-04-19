@@ -160,3 +160,69 @@ arr = arr.reduce((p, c) => {
 - history 提供了 pushState 和 replaceState 两个方法，这两个方法改变 URL 的 path 部分不会引起页面刷新
 - history 提供了 popstate 事件，但是有些不同：通过浏览器前进后退改变 url 会触发 popstate，通过 a 标签和 pushState/replaceState 不会触发 popstate
   但是可以拦截 pushState/replaceState 的调用及 a 标签的点击事件
+
+#### css reset
+
+```css
+.border-t-1,
+.border-r-1,
+.border-l-1,
+.border-b-1,
+.border-all-1 {
+  position: relative;
+}
+.border-t-1::before,
+.border-r-1::before,
+.border-l-1::before,
+.border-b-1::before,
+.border-all-1::before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  border: 0 solid rgb(230, 230, 230);
+  transform-origin: 0 0;
+  transform: scale(0.5, 0.5);
+  pointer-events: none;
+}
+.border-t-1::before {
+  border-top-width: 1px;
+}
+.border-r-1::before {
+  border-right-width: 1px;
+}
+.border-b-1::before {
+  border-bottom-width: 1px;
+}
+.border-l-1::before {
+  border-left-width: 1px;
+}
+.border-all-1::before {
+  border-width: 1px;
+}
+.line-1,
+.line-2,
+.line-3,
+.line-4 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  word-break: break-word;
+  overflow: hidden;
+  white-space: normal;
+}
+.line-1 {
+  -webkit-line-clamp: 1;
+}
+.line-2 {
+  -webkit-line-clamp: 2;
+}
+.line-3 {
+  -webkit-line-clamp: 3;
+}
+.line-4 {
+  -webkit-line-clamp: 4;
+}
+```
