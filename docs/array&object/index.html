@@ -11,18 +11,72 @@
       //   var undefined = 'a';
       //   console.log(undefined, void 0);
       // })();
-      try {
-          let a = 0
-          ;(async function() {
-              a += 1
-              console.log('inner', a)
-              throw new Error('123')
-              // a()
-          })()
-          console.log('outer', a)
-      } catch(e) {
-          console.warn('Error', e)
+      // try {
+      //     let a = 0
+      //     ;(async function() {
+      //         a += 1
+      //         console.log('inner', a)
+      //         throw new Error('123')
+      //         // a()
+      //     })()
+      //     console.log('outer', a)
+      // } catch(e) {
+      //     console.warn('Error', e)
+      // }
+      Array.prototype._map = function(callback) {
+          if (typeof callback !== 'function') {
+              return null
+          }
+          const arr = [...this]
+          if (!arr.length) {
+              return []
+          }
+          return arr.reduce((p, c, i) => {
+              p.push(callback(c, i))
+              return p
+          }, [])
       }
+      const arr = [1, 2, 3]
+      const result = arr._map((item, index) => {
+          return item + index
+      })
+
+      function myNew() {
+        const constructor = Array.prototype.shift.call(arguments)
+        const obj = Object.create(constructor.prototype)
+        const result = constructor()
+        return result instanceof Object ? result : obj
+      }
+
+      Function.prototype._call = function(context, ...args) {
+        let ctx = context || window
+        ctx.fn = this
+        ctx.fn(...args)
+        delete ctx.fn
+      }
+
+      function foo(...args) {
+        console.log(this.name, this.age, ...args)
+      }
+      const obj = {
+        name: 's',
+        age: 2
+      }
+
+      // foo.call(obj, 1, 2)
+
+
+      Function.prototype._bind = function(context, ...agrs) {
+        const fn = this
+        const foo = function() {}
+        const bar = function(...arg) {
+          fn.apply(this instanceof fn ? fn : context, args.concat(arg))
+        }
+        foo.prototype = this.prototype
+        bar.prototype = new foo()
+        return bar
+      }
+      foo._bind(obj, 3)(1, 2)
     </script>
   </body>
 </html>

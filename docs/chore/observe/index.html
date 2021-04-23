@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    class Subject {
+      constructor(content) {
+        this.content = content
+        this.observeList = []
+      }
+
+      addObserver(observe) {
+        this.observeList.push(observe)
+      }
+
+      remove(observe) {
+        this.observeList.forEach((item, index) => {
+          if (item.name === observe.name) {
+            this.observeList.splice(index, 1)
+          }
+        })
+      }
+
+      publish() {
+        this.observeList.forEach(observe => {
+          observe.update(this.content)
+        })
+      }
+    }
+    class Observe {
+      constructor(name) {
+        this.name = name
+      }
+
+      update(content) {
+        console.log(`${this.name}订阅内容：${content}`)
+      }
+    }
+
+    const obv1 = new Observe('wy')
+    const obv2 = new Observe('yss')
+
+    const sub = new Subject('hahahha')
+    sub.addObserver(obv1)
+    sub.addObserver(obv2)
+    sub.publish()
+
+    
+
+  </script>
+</body>
+</html>

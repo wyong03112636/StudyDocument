@@ -21,6 +21,24 @@
     setInterval(throttle(() => {
         console.log('hello world')
     }, 5000), 1)
+
+
+    function deboundce(callback, duration) {
+      let timeOut;
+      return (...arg) => {
+        if (timeOut) {
+          clearTimeout(timeOut)
+        }
+        timeOut = setTimeout(() => {
+          callback(arg)
+        }, duration)
+      }
+    }
+
+    
+
+
+
   </script>
 </body>
 </html>

@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 export default (dt, fmt) => {
   if (!dt) return '-';
   if (/^\d{10}$/.test(dt)) {
@@ -28,7 +27,6 @@ export default (dt, fmt) => {
     fmt = fmt.replace(yReg[0], `${date.getFullYear()}`.substr(4 - yReg[0].length));
   }
   for (const k in o) {
-    // eslint-disable-line
     const oReg = fmt.match(new RegExp(`(${k})`));
     if (oReg && oReg[0]) {
       fmt = fmt.replace(
