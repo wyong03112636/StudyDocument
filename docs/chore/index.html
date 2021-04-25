@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const mapMenu = {
+      'ITEM0001': {
+        name: '黄焖鸡',
+        price: 18
+      },
+      'ITEM0013': {
+        name: '肉夹馍',
+        price: 6,
+      },
+      'ITEM0022': {
+        name: '凉皮',
+        price: 8
+      }
+    }
+
+    // 优惠菜品清单
+    const preferentialDishes = ['黄焖鸡', '凉皮']
+
+    const is = (data, type) => Object.prototype.toString.call(data) === `[object ${type}]`
+    
+    const formatData = (data,isUseDiscount = false) => {
+      return data.reduce((p, c, i, arr) => {
+        const singleDish = {}
+        const detailDish = c.split(' x ')
+        singleDish.name = mapMenu[detailDish[0]].name
+        if (isUseDiscount && preferentialDishes.indexOf([detailDish[0]].name) > -1) {
+          singleDish.price = mapMenu[detailDish[0]].price / 2
+        } else {
+          singleDish.price = mapMenu[detailDish[0]].price
+        }
+        singleDish.count = Number(detailDish[1])
+        p.push(singleDish)
+        return p
+      }, [])
+    }
+
+    // 计算总价
+    const calculateTotalPrice = (menu) => {
+      let total = 0;
+      menu.forEach(item => {
+        total += (Number(item.count) * Number(item.price))
+      })
+      return total
+    }
+
+    // 判断是否包含优惠菜品
+    const isInclude = (menu) => {
+      let bool = false
+      menu.forEach(item => {
+        if (preferentialDishes.indexOf(item.name) > -1) {
+          bool = true
+        }
+      })
+      return bool
+    }
+
+    const outPutResult = (menu) => {
+      let result = ''
+      menu.forEach(item => {
+        result += `${item.name} x ${item.count} = ${item.count * item.price} 元\n          `
+      })
+      return result
+    }
+
+    const bestCharge = (menu = []) => {
+      if (!is(menu, 'Array')) {
+        throw new Error('输入不合规')
+      }
+      const detailMenu = formatData(menu)
+      let total = calculateTotalPrice(detailMenu)
+      const result = outPutResult(detailMenu)
+      if (total >= 30) {
+        return `
+          ============= 订餐明细 =============
+          ${result}
+          -----------------------------------
+          使用优惠:
+          满30减6元，省6元
+          -----------------------------------
+          总计：${total - 6}元
+          ===================================
+        `
+      }
+      if (isInclude(detailMenu)) {
+        const discountMenu = formatData(menu, true)
+        const discountTotal = calculateTotalPrice(discountMenu)
+        return `
+          ============= 订餐明细 =============
+          ${result}
+          -----------------------------------
+          使用优惠:
+          指定菜品半价(黄焖鸡，凉皮)，省${total - discountTotal}元
+          -----------------------------------
+          总计：${discountTotal}元
+          ===================================
+        `
+      } else {
+        return `
+        ============= 订餐明细 =============
+        ${result}
+        -----------------------------------
+        总计：${total}元
+        ===================================
+        `
+      }
+    }
+
+    console.log(bestCharge(["ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1"]))
+  </script>
+</body>
+</html>
