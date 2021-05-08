@@ -52,4 +52,49 @@ function test<T extends Test>(arg: T): T {}
 function test<T extends number | string>(arg: T): T {}
 ```
 
+## Advanced Typescipt
+
+```ts
+interface Todo {
+  title: string;
+  desc: string;
+  completed: boolean;
+}
+
+// 取出某个interface的key
+type T1 = Pick<Todo, 'title' | 'desc'>;
+
+// 去除某个interface的key
+type T2 = Omit<Todo, 'completed'>;
+
+const a: T1 = {
+  title: 'a',
+  desc: 'b',
+};
+
+const b: T2 = {
+  title: 'a',
+  desc: 'b',
+};
+
+interface Todo {
+  title: string;
+  desc: string;
+}
+// 某个interface的key变为可选
+type TodoPreview = Partial<Todo>;
+
+// 可选变为必选
+type T = Required<TodoPreview>;
+
+const a: TodoPreview = {
+  title: 'a',
+};
+
+const b: T = {
+  title: 'a',
+  desc: 'v',
+};
+```
+
 ## [参考链接](https://juejin.im/post/6876240277208563720#heading-79)
