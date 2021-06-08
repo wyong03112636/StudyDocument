@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'Myself document',
-  description: 'Myself document',
+  title: 'Personal Documents',
+  description: 'Personal Dpcuments',
   themeConfig: {
     smoothScroll: true,
     nav: [
