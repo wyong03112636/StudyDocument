@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Personal Documents',
-  description: 'Personal Dpcuments',
+  description: 'Personal Documents',
   dest: './dist',
   themeConfig: {
     smoothScroll: true,

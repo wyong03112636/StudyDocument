@@ -1,6 +1,6 @@
 # Babel
 
-## 什么是 Babel？
+## 什么是 Babel 测试？
 
 - Babel 是一个工具链，主要用于旧浏览器中将 ES5 以上的代码转换为向兼容版本的 JavaScript 代码。
   - 语法转换
@@ -10,22 +10,22 @@
 ## Babel 基本配置
 
 ```js
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true); //避免报错 Caching was left unconfigured
   const presets = [
     //设置转换规则
     [
-      '@babel/env',
+      "@babel/env",
       {
         targets: {
           //配置兼容的浏览器的版本
-          edge: '7',
-          firefox: '60',
-          chrome: '67',
-          safari: '11.1',
+          edge: "7",
+          firefox: "60",
+          chrome: "67",
+          safari: "11.1",
           // ie: '6'
         },
-        useBuiltIns: 'usage', //Babel过滤全局代码。查找缺少的功能并使用polyfill
+        useBuiltIns: "usage", //Babel过滤全局代码。查找缺少的功能并使用polyfill
       },
     ],
   ];
@@ -40,7 +40,7 @@ module.exports = function(api) {
 ## 使用 Js 方式做 babel 转换
 
 ```js
-const babel = require('@babel/core');
+const babel = require("@babel/core");
 const code = `
 const sayHi = () => {
   console.log('Hello, Babel')
@@ -82,15 +82,15 @@ console.log(result);
 
 ```js
 // in
-obj.foo = 'isValid';
+obj.foo = "isValid";
 
-obj.const = 'isKeyword';
-obj['var'] = 'isKeyword';
+obj.const = "isKeyword";
+obj["var"] = "isKeyword";
 //out
-obj.foo = 'isValid';
+obj.foo = "isValid";
 
-obj['const'] = 'isKeyword';
-obj['var'] = 'isKeyword';
+obj["const"] = "isKeyword";
+obj["var"] = "isKeyword";
 ```
 
 ## @babel/plugin-transform-property-literals
@@ -102,8 +102,8 @@ obj['var'] = 'isKeyword';
 //in
 var foo = {
   // changed
-  bar: function() {},
-  '1': function() {},
+  bar: function () {},
+  1: function () {},
 
   // not changed
   default: 1,
@@ -112,8 +112,8 @@ var foo = {
 };
 // out
 var foo = {
-  bar: function() {},
-  1: function() {},
+  bar: function () {},
+  1: function () {},
 
   default: 1,
   [a]: 2,
@@ -156,10 +156,10 @@ var foo = Object.defineProperties(
   {},
   {
     bar: {
-      get: function() {
+      get: function () {
         return this._bar;
       },
-      set: function(value) {
+      set: function (value) {
         this._bar = value;
       },
       configurable: true,
@@ -179,17 +179,17 @@ var foo = Object.defineProperties(
 ```js
 //in
 var a = () => {};
-var a = b => b;
+var a = (b) => b;
 
-const double = [1, 2, 3].map(num => num * 2);
+const double = [1, 2, 3].map((num) => num * 2);
 console.log(double); // [2,4,6]
 //out
-var a = function() {};
-var a = function(b) {
+var a = function () {};
+var a = function (b) {
   return b;
 };
 
-const double = [1, 2, 3].map(function(num) {
+const double = [1, 2, 3].map(function (num) {
   return num * 2;
 });
 console.log(double); // [2,4,6]
@@ -207,14 +207,14 @@ console.log(double); // [2,4,6]
     return n;
   }
 }
-name('Steve');
+name("Steve");
 //out
 {
-  let name = function(n) {
+  let name = function (n) {
     return n;
   };
 }
-name('Steve');
+name("Steve");
 ```
 
 ## @babel/plugin-transform-block-scoping
@@ -248,17 +248,17 @@ class Test {
   }
 
   logger() {
-    console.log('Hello', this.name);
+    console.log("Hello", this.name);
   }
 }
 //out
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
-    throw new TypeError('Cannot call a class as a function');
+    throw new TypeError("Cannot call a class as a function");
   }
 }
 
-var Test = (function() {
+var Test = (function () {
   function Test(name) {
     _classCallCheck(this, Test);
 
@@ -266,7 +266,7 @@ var Test = (function() {
   }
 
   Test.prototype.logger = function logger() {
-    console.log('Hello', this.name);
+    console.log("Hello", this.name);
   };
 
   return Test;
@@ -281,10 +281,10 @@ var Test = (function() {
 ```js
 //in
 var obj = {
-  ['x' + foo]: 'heh',
-  ['y' + bar]: 'noo',
-  foo: 'foo',
-  bar: 'bar',
+  ["x" + foo]: "heh",
+  ["y" + bar]: "noo",
+  foo: "foo",
+  bar: "bar",
 };
 //out
 var _obj;
@@ -306,10 +306,10 @@ function _defineProperty(obj, key, value) {
 
 var obj =
   ((_obj = {}),
-  _defineProperty(_obj, 'x' + foo, 'heh'),
-  _defineProperty(_obj, 'y' + bar, 'noo'),
-  _defineProperty(_obj, 'foo', 'foo'),
-  _defineProperty(_obj, 'bar', 'bar'),
+  _defineProperty(_obj, "x" + foo, "heh"),
+  _defineProperty(_obj, "y" + bar, "noo"),
+  _defineProperty(_obj, "foo", "foo"),
+  _defineProperty(_obj, "bar", "bar"),
   _obj);
 ```
 
@@ -349,11 +349,11 @@ var y = {
   a: 3,
 };
 //out
-var x = { a: 5, ['a']: 6 };
+var x = { a: 5, ["a"]: 6 };
 var y = {
   get a() {},
   set a(x) {},
-  ['a']: 3,
+  ["a"]: 3,
 };
 ```
 
@@ -402,9 +402,9 @@ try {
 
 ```js
 // in
-let number = x => x;
+let number = (x) => x;
 // out
-let number = x => x;
+let number = (x) => x;
 ```
 
 ## @babel/plugin-transform-instanceof
@@ -417,7 +417,11 @@ let number = x => x;
 foo instanceof Bar;
 //out
 function _instanceof(left, right) {
-  if (right != null && typeof Symbol !== 'undefined' && right[Symbol.hasInstance]) {
+  if (
+    right != null &&
+    typeof Symbol !== "undefined" &&
+    right[Symbol.hasInstance]
+  ) {
     return right[Symbol.hasInstance](left);
   } else {
     return left instanceof right;
@@ -436,9 +440,9 @@ _instanceof(foo, Bar);
 //in
 var b = 0b11; // binary integer literal
 var o = 0o7; // octal integer literal
-const u = 'Hello\u{000A}\u{0009}!'; // unicode string literals, newline and tab
+const u = "Hello\u{000A}\u{0009}!"; // unicode string literals, newline and tab
 //out
 var b = 3; // binary integer literal
 var o = 7; // octal integer literal
-const u = 'Hello\n\t!'; // unicode string literals, newline and tab
+const u = "Hello\n\t!"; // unicode string literals, newline and tab
 ```
