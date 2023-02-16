@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "vuepress dev docs",
     "dev": "node --max_old_space_size=4096 ./node_modules/vuepress/cli.js dev docs --open",
-    "build": "node --max_old_space_size=4096 ./node_modules/vuepress/cli.js build docs"
+    "build": "node --max_old_space_size=4096 ./node_modules/vuepress/cli.js build docs",
+    "doctor": "node doctor.js"
   },
   "keywords": [],
   "author": "",
