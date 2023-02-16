@@ -1,4 +1,4 @@
-# Babel 测试
+# Babel
 
 ## 什么是 Babel ?
 
