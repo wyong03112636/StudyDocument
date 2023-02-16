@@ -17,6 +17,7 @@
     "tsc": "^1.20150623.0"
   },
   "devDependencies": {
+    "shelljs": "^0.8.5",
     "vuepress": "^1.7.1"
   }
 }
