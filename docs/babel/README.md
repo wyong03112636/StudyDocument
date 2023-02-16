@@ -1,4 +1,4 @@
-# Babel new
+# Babel
 
 ## 什么是 Babel ?
 
