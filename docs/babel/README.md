@@ -1,6 +1,6 @@
 # Babel11
 
-## 什么是 Babel ?
+## 什么是 Babel
 
 - Babel 是一个工具链，主要用于旧浏览器中将 ES5 以上的代码转换为向兼容版本的 JavaScript 代码。
   - 语法转换
